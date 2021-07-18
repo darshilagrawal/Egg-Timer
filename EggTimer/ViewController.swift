@@ -35,7 +35,11 @@ class ViewController: UIViewController {
         progressEgg.progress=0
         timer.invalidate()
         let hardness=sender.currentTitle!
-        
+        UIView.transition(with: sender,
+                                  duration: 0.6,
+                                  options: .transitionFlipFromLeft,
+                                  animations: {
+                }, completion: nil)
         totalTime=eggTimes[hardness]!
         
     timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
