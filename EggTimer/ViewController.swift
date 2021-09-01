@@ -10,6 +10,11 @@ class ViewController: UIViewController {
     
     var player: AVAudioPlayer?
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        progressEgg.layer.cornerRadius = 5
+        progressEgg.clipsToBounds = true
+    }
                func playSound() {
                    let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")!
 
