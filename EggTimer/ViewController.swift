@@ -7,13 +7,31 @@ class ViewController: UIViewController {
     var secondsPassed=0
     var totalTime=0
     var timer=Timer()
-    
+    var firstSound: Bool = false
     var player: AVAudioPlayer?
-
+    @IBOutlet weak var resetButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         progressEgg.layer.cornerRadius = 5
         progressEgg.clipsToBounds = true
+        resetButton.isHidden = true
+        resetButton.setTitle("Reset", for: .normal)
+        resetButton.setTitleColor(.white, for: .normal)
+        resetButton.backgroundColor = .darkText
+        resetButton.layer.cornerRadius = 5
+        resetButton.clipsToBounds = true
+        resetButton.addTarget(self, action: #selector(resetButtonClicked), for: .touchUpInside)
+        
+    }
+    @objc func resetButtonClicked(){
+        player?.stop()
+        resetButton.isHidden = true
+        outputScreen.text="How would you Like your Eggs"
+        progressEgg.progress=0
+        timer.invalidate()
+        secondsPassed = 0
+        
     }
                func playSound() {
                    let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")!
@@ -24,16 +42,19 @@ class ViewController: UIViewController {
 
                        player.prepareToPlay()
                        player.play()
-                    
+                    player.numberOfLoops = -1
+                    resetButton.isHidden = false
 
                    } catch let error as NSError {
                        print(error.description)
                    }
                }
+    
+            
     @IBOutlet weak var outputScreen: UILabel!
-    
-    
     @IBOutlet weak var progressEgg: UIProgressView!
+    
+  
     @IBAction func hardnessSelector(_ sender: UIButton) {
         player?.stop()
         secondsPassed=0
@@ -55,6 +76,7 @@ class ViewController: UIViewController {
     @objc func updateCounter() {
         
         if secondsPassed<totalTime {
+            firstSound = false
             outputScreen.text="How would you Like your Eggs"
             secondsPassed += 1
             
@@ -63,10 +85,12 @@ class ViewController: UIViewController {
             progressEgg.progress = progressTime
         }
         else{
+            if firstSound == false{
             outputScreen.text="Done"
             playSound()
+            firstSound = true
+            }
             
-           
         }
     
     }

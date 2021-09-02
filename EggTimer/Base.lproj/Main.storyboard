@@ -131,10 +131,20 @@
                                                 <color key="progressTintColor" systemColor="systemYellowColor"/>
                                                 <color key="trackTintColor" systemColor="systemGrayColor"/>
                                             </progressView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fol-c6-VgY">
+                                                <rect key="frame" x="112" y="169" width="150" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="PVE-Dh-TAL"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                            </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="fol-c6-VgY" firstAttribute="top" secondItem="m9Z-e1-HMm" secondAttribute="bottom" constant="36" id="0Q6-Dt-BPV"/>
                                             <constraint firstItem="m9Z-e1-HMm" firstAttribute="centerY" secondItem="nJN-th-c5K" secondAttribute="centerY" id="Sbi-L7-Ha8"/>
                                             <constraint firstItem="m9Z-e1-HMm" firstAttribute="leading" secondItem="nJN-th-c5K" secondAttribute="leading" id="aI6-n9-0dp"/>
+                                            <constraint firstItem="fol-c6-VgY" firstAttribute="centerX" secondItem="nJN-th-c5K" secondAttribute="centerX" id="iK9-4E-6ip"/>
+                                            <constraint firstItem="fol-c6-VgY" firstAttribute="centerX" secondItem="nJN-th-c5K" secondAttribute="centerX" id="w8H-vA-4CP"/>
                                             <constraint firstAttribute="trailing" secondItem="m9Z-e1-HMm" secondAttribute="trailing" id="wfK-OY-xbx"/>
                                         </constraints>
                                     </view>
@@ -153,6 +163,7 @@
                     <connections>
                         <outlet property="outputScreen" destination="XLm-5r-pSP" id="mOh-pi-U1n"/>
                         <outlet property="progressEgg" destination="m9Z-e1-HMm" id="Hdj-b5-jyv"/>
+                        <outlet property="resetButton" destination="fol-c6-VgY" id="VmU-fw-FIH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
