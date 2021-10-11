@@ -22,8 +22,8 @@ class ViewController: UIViewController {
         resetButton.layer.cornerRadius = 5
         resetButton.clipsToBounds = true
         resetButton.addTarget(self, action: #selector(resetButtonClicked), for: .touchUpInside)
-        
     }
+    
     @objc func resetButtonClicked(){
         player?.stop()
         resetButton.isHidden = true
@@ -31,30 +31,30 @@ class ViewController: UIViewController {
         progressEgg.progress=0
         timer.invalidate()
         secondsPassed = 0
-        
     }
-               func playSound() {
-                   let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")!
-
-                   do {
-                       player = try AVAudioPlayer(contentsOf: url)
-                       guard let player = player else { return }
-
-                       player.prepareToPlay()
-                       player.play()
-                    player.numberOfLoops = -1
-                    resetButton.isHidden = false
-
-                   } catch let error as NSError {
-                       print(error.description)
-                   }
-               }
     
+    func playSound() {
+        let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")!
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
             
+            player.prepareToPlay()
+            player.play()
+            player.numberOfLoops = -1
+            resetButton.isHidden = false
+            
+        } catch let error as NSError {
+            print(error.description)
+        }
+    }
+    
+    
     @IBOutlet weak var outputScreen: UILabel!
     @IBOutlet weak var progressEgg: UIProgressView!
     
-  
+    
     @IBAction func hardnessSelector(_ sender: UIButton) {
         player?.stop()
         secondsPassed=0
@@ -62,17 +62,15 @@ class ViewController: UIViewController {
         timer.invalidate()
         let hardness=sender.currentTitle!
         UIView.transition(with: sender,
-                                  duration: 0.6,
-                                  options: .transitionFlipFromLeft,
-                                  animations: {
-                }, completion: nil)
+                          duration: 0.6,
+                          options: .transitionFlipFromLeft,
+                          animations: {
+        }, completion: nil)
         totalTime=eggTimes[hardness]!
         
-    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-   
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     }
-
-
+    
     @objc func updateCounter() {
         
         if secondsPassed<totalTime {
@@ -81,19 +79,14 @@ class ViewController: UIViewController {
             secondsPassed += 1
             
             let progressTime=Float(secondsPassed)/Float(totalTime)
-//            print(progressTime)
+            //            print(progressTime)
             progressEgg.progress = progressTime
-        }
-        else{
-            if firstSound == false{
-            outputScreen.text="Done"
-            playSound()
-            firstSound = true
+        } else {
+            if firstSound == false {
+                outputScreen.text="Done"
+                playSound()
+                firstSound = true
             }
-            
         }
-    
     }
-    
-
 }
