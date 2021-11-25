@@ -1,7 +1,6 @@
-
-
 import UIKit
 import AVFoundation
+
 class ViewController: UIViewController {
     let eggTimes = ["Soft":30,"Medium":40,"Hard":70]
     var secondsPassed=0
